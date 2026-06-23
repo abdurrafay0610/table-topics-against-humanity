@@ -1,9 +1,14 @@
 # Card 1: Role — who is the speaker pretending to be?
 You are a retired superhero.
+You are a retired unknown villain.
 You are the CEO of common sense.
 You are a time traveller from 2075.
-You are a philosopher hired by a startup.
-You are a cat giving a TED Talk.
-You are the last honest politician on Earth.
+You are a ghost trying to stay relevant.
+You are a cat.
 You are a motivational speaker who has lost motivation.
-You are an alien studying human small talk.
+You are an awkward alien.
+You are an overly dramatic vampire with a theatrical accent.
+You are a magicless wizard who thinks his spells work.
+You are a detective who solves crimes by guessing.
+You are a clown going through a midlife crisis.
+You are a genie who is tired of granting wishes.
