@@ -1,0 +1,29 @@
+{% extends "base.html" %}
+
+{% block content %}
+<section class="hero compact">
+  <p class="eyebrow">Round 1</p>
+  <h1>Who faces the chaos?</h1>
+  <p class="subtitle">Pick a speaker at random. Once selected, they are removed from today’s pool.</p>
+</section>
+
+<main class="raffle-grid">
+  <section class="stage-card raffle-stage">
+    <div class="name-window" id="nameWindow">Ready?</div>
+    <div class="dramatic-line" id="dramaticLine">Press draw when the audience is emotionally prepared.</div>
+
+    <div class="button-row">
+      <button class="primary-btn" id="drawBtn">Draw Speaker</button>
+      <button class="ghost-btn" id="resetBtn">Reset Raffle</button>
+    </div>
+  </section>
+
+  <aside class="stage-card side-panel">
+    <h2>Remaining Speakers</h2>
+    <p class="muted" id="remainingCount">Loading...</p>
+    <ul class="name-list" id="remainingList"></ul>
+  </aside>
+</main>
+
+<script src="/static/raffle.js"></script>
+{% endblock %}
