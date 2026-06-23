@@ -1,5 +1,8 @@
 const drawCardsBtn = document.getElementById("drawCardsBtn");
+const resetDeckBtn = document.getElementById("resetDeckBtn");
+const discardCardsToggle = document.getElementById("discardCardsToggle");
 const topicHint = document.getElementById("topicHint");
+const deckStatus = document.getElementById("deckStatus");
 const fullTopic = document.getElementById("fullTopic");
 
 const cards = [
@@ -12,8 +15,48 @@ function sleep(ms) {
   return new Promise(resolve => setTimeout(resolve, ms));
 }
 
+function updateDeckStatus(counts) {
+  if (!counts) return;
+
+  deckStatus.textContent = `Cards left: ${counts.roles} roles · ${counts.situations} situations · ${counts.twists} twists`;
+}
+
+async function loadDeckStatus() {
+  try {
+    const res = await fetch("/api/cards/status");
+    if (!res.ok) return;
+
+    const data = await res.json();
+    updateDeckStatus(data.remaining_counts);
+  } catch (_) {
+    deckStatus.textContent = "Deck status unavailable.";
+  }
+}
+
+async function resetDeck() {
+  resetDeckBtn.disabled = true;
+  topicHint.textContent = "Resetting the deck. The chaos has been forgiven.";
+
+  try {
+    const res = await fetch("/api/cards/reset", { method: "POST" });
+    if (!res.ok) {
+      const err = await res.json();
+      throw new Error(err.detail || "Could not reset deck.");
+    }
+
+    const data = await res.json();
+    updateDeckStatus(data.remaining_counts);
+    topicHint.textContent = "Deck reset. All cards are back in play.";
+  } catch (error) {
+    topicHint.textContent = error.message;
+  } finally {
+    resetDeckBtn.disabled = false;
+  }
+}
+
 async function drawCards() {
   drawCardsBtn.disabled = true;
+  resetDeckBtn.disabled = true;
   fullTopic.classList.remove("visible");
   fullTopic.textContent = "";
   topicHint.textContent = "Shuffling chaos...";
@@ -27,7 +70,8 @@ async function drawCards() {
 
   let data;
   try {
-    const res = await fetch("/api/cards/draw", { method: "POST" });
+    const discardUsed = discardCardsToggle.checked;
+    const res = await fetch(`/api/cards/draw?discard_used=${discardUsed}`, { method: "POST" });
     if (!res.ok) {
       const err = await res.json();
       throw new Error(err.detail || "Could not draw cards.");
@@ -36,6 +80,7 @@ async function drawCards() {
   } catch (error) {
     topicHint.textContent = error.message;
     drawCardsBtn.disabled = false;
+    resetDeckBtn.disabled = false;
     return;
   }
 
@@ -45,10 +90,17 @@ async function drawCards() {
     await sleep(650);
   }
 
-  topicHint.textContent = "The topic has spoken.";
+  topicHint.textContent = data.discard_used
+    ? "The topic has spoken. These cards have left the building."
+    : "The topic has spoken.";
   fullTopic.textContent = data.full_topic;
   fullTopic.classList.add("visible");
+  updateDeckStatus(data.remaining_counts);
+
   drawCardsBtn.disabled = false;
+  resetDeckBtn.disabled = false;
 }
 
 drawCardsBtn.addEventListener("click", drawCards);
+resetDeckBtn.addEventListener("click", resetDeck);
+loadDeckStatus();

@@ -1,8 +1,17 @@
 # Add one Toastmaster name per line.
 # Blank lines and lines starting with # are ignored.
-Abdurrafay
-Rabea
-Toastmaster A
-Toastmaster B
-Toastmaster C
-Toastmaster D
+Matiullah Abbasi
+Areej Fatima
+Moin Khan
+Faiza Nasreen
+Urooj Ul Huda
+Fahad ul hassan Mattoo
+Ahmed Jawad
+Mariam Khalid
+Afnaan Asif
+Awab Ahmed
+Muhammad Mustafa Asad
+Syed Faizan Ahmed
+Momina Amjad
+Minahil Sana
+Muhammad Talal Maqsood

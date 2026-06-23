@@ -42,8 +42,28 @@
 
   <section class="stage-card topic-summary">
     <button class="primary-btn large" id="drawCardsBtn">Reveal the Topic</button>
+
     <p class="muted" id="topicHint">Cards are currently face down.</p>
+    <p class="deck-status" id="deckStatus">Deck status loading...</p>
+
     <div class="full-topic" id="fullTopic"></div>
+
+    <div class="topic-bottom-controls">
+      <div class="deck-options-heading">Deck Options</div>
+
+      <div class="deck-options-row">
+        <label class="deck-toggle" for="discardCardsToggle">
+          <input type="checkbox" id="discardCardsToggle">
+          <span class="toggle-box"></span>
+          <span class="toggle-copy">
+            <strong>Discard revealed cards</strong>
+            <small>No role, situation, or twist repeats until the deck is reset.</small>
+          </span>
+        </label>
+
+        <button class="ghost-btn compact" id="resetDeckBtn" type="button">Reset Deck</button>
+      </div>
+    </div>
   </section>
 </main>
 
