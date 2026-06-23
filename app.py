@@ -44,17 +44,20 @@ def get_remaining_names() -> List[str]:
 
 @app.get("/", response_class=HTMLResponse)
 def home(request: Request):
-    return templates.TemplateResponse("raffle.html", {"request": request, "title": "Raffle"})
+    # return templates.TemplateResponse("raffle.html", {"request": request, "title": "Raffle"})
+    return templates.TemplateResponse(request=request, name="raffle.html", context={"title": "Raffle"})
 
 
 @app.get("/raffle", response_class=HTMLResponse)
 def raffle_page(request: Request):
-    return templates.TemplateResponse("raffle.html", {"request": request, "title": "Raffle"})
+    # return templates.TemplateResponse("raffle.html", {"request": request, "title": "Raffle"})
+    return templates.TemplateResponse(request=request, name="raffle.html", context={"title": "Raffle"})
 
 
 @app.get("/topics", response_class=HTMLResponse)
 def topics_page(request: Request):
-    return templates.TemplateResponse("topics.html", {"request": request, "title": "Table Topics"})
+    # return templates.TemplateResponse("topics.html", {"request": request, "title": "Table Topics"})
+    return templates.TemplateResponse(request=request, name="topics.html", context={"title": "Table Topics against Humanity"})
 
 
 @app.get("/api/raffle/list")
