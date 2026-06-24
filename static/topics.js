@@ -103,4 +103,15 @@ async function drawCards() {
 
 drawCardsBtn.addEventListener("click", drawCards);
 resetDeckBtn.addEventListener("click", resetDeck);
+
+const DISCARD_KEY = "ttah_discard_used";
+
+// Restore the toggle from the last visit
+discardCardsToggle.checked = localStorage.getItem(DISCARD_KEY) === "true";
+
+// Remember it whenever it changes
+discardCardsToggle.addEventListener("change", () => {
+  localStorage.setItem(DISCARD_KEY, discardCardsToggle.checked);
+});
+
 loadDeckStatus();
